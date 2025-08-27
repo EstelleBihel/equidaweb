@@ -28,7 +28,7 @@ public class Client {
         return nom;
     }
 
-    public void setPrenom(String jean) {
+    public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
 
