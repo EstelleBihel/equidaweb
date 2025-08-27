@@ -5,6 +5,25 @@ public class Vente {
     private String nom;
     private String dateDeVente;
 
+    private CategorieVente categorieVente;
+    private Lieu lieu;
+
+    public void setLieu(Lieu lieu) {
+        this.lieu = lieu;
+    }
+
+    public Lieu getLieu() {
+        return lieu;
+    }
+
+    public CategorieVente getCategorieVente() {
+        return categorieVente;
+    }
+
+    public void setCategorieVente(CategorieVente categorieVente) {
+        this.categorieVente = categorieVente;
+    }
+
     public Vente() {
     }
 

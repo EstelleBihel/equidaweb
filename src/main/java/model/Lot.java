@@ -4,6 +4,25 @@ public class Lot {
     private int id;
     private int prixDepart;
 
+    private Vente vente;
+    private Cheval cheval;
+
+    public void setCheval(Cheval cheval) {
+        this.cheval = cheval;
+    }
+
+    public Cheval getCheval() {
+        return cheval;
+    }
+
+    public void setVente(Vente vente) {
+        this.vente = vente;
+    }
+
+    public Vente getVente() {
+        return vente;
+    }
+
     public Lot() {
     }
 
@@ -11,8 +30,8 @@ public class Lot {
         this.id = id;
     }
 
-    public static Lot getInstance() {
-        return ;
+    public int getId() {
+        return id;
     }
 
     public void setPrixDepart(int prixDepart) {
