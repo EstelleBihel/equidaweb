@@ -23,6 +23,6 @@ public class TestLot {
         lot1.setCheval(ch1);
 
         System.out.println(lot1.getVente().getNom()+" "+lot1.getVente().getDateDeVente()+" "+lot1.getCheval().getNom());
-        System.out.println(lot1.getCheval().getNom())+lot1.getCheval().getId());
+        System.out.println(lot1.getCheval().getNom()+lot1.getCheval().getId());
     }
 }

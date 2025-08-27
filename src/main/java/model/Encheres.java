@@ -4,7 +4,28 @@ public class Encheres {
     private int numero;
     private int montant;
 
-    public Encheres(){
+    private Lot lot;
+    private Client client;
+
+
+    public Encheres() {
+
+    }
+
+    public void setLot(Lot lot) {
+        this.lot = lot;
+    }
+
+    public Lot getLot() {
+        return lot;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Client getClient() {
+        return client;
     }
 
     public void setNumero(int numero) {
