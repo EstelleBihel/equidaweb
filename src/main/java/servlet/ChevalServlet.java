@@ -21,22 +21,32 @@ import java.time.LocalDate;
 public class ChevalServlet extends HttpServlet {
 
     Connection cnx;
-    
+
     public void init() {
-        ServletContext servletContext = getServletContext();
-        cnx = (Connection)servletContext.getAttribute("connection");
+        ServletContext sc = getServletContext();
+        cnx = (Connection) sc.getAttribute("connection");
+
+        if (cnx == null) {
+            System.out.println("[ERREUR] Pas de connexion JDBC dans le ServletContext (attribut 'connection' manquant).");
+            return; // on évite le crash 500 ici
+        }
+
         try {
-            System.out.println("INIT SERVLET=" + cnx.getSchema());
-        } catch (SQLException ex) {
-            Logger.getLogger(ChevalServlet.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("[INFO] JDBC URL = " + cnx.getMetaData().getURL());
+            System.out.println("[INFO] Schema   = " + cnx.getSchema());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-    
+
+
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         String path = request.getPathInfo();
         System.out.println("PathInfo: " + path);
 
         if ("/list".equals(path)) {
+            System.out.println("[DEBUG] /list - cnx is null? " + (cnx == null));
+
             ArrayList<Cheval> lesChevaux = DaoCheval.getLesChevaux(cnx);
             request.setAttribute("pLesChevaux", lesChevaux);
             this.getServletContext().getRequestDispatcher("/WEB-INF/views/cheval/list.jsp").forward(request, response);
