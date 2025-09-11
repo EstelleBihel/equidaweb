@@ -4,8 +4,8 @@ public class CategorieVente {
     private int code;
     private String libelle;
 
-    public CategorieVente(){}
-            ;
+    public CategorieVente(){
+    }
 
     public void setCode(int code) {
         this.code = code;

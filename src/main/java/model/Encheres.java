@@ -3,10 +3,8 @@ package model;
 public class Encheres {
     private int numero;
     private int montant;
-
     private Lot lot;
     private Client client;
-
 
     public Encheres() {
 
