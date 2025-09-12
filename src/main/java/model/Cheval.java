@@ -9,10 +9,28 @@ public class Cheval {
     private LocalDate dateNaissance;
     private String sexe;
     private String sire;
+    private double poids;
+    private double taille;
+    private Robe robe;
 
     private Race race;
 
     public Cheval() {
+    }
+
+    public void setPoids(double poids) {
+        this.poids = poids;
+    }
+    public double getPoids() {
+        return poids;
+    }
+
+    public void setTaille(double taille) {
+        this.taille = taille;
+    }
+
+    public double getTaille() {
+        return taille;
     }
 
     public int getId() {
@@ -49,6 +67,14 @@ public class Cheval {
     }
     public void setSexe(String sexe) {
         this.sexe = sexe;
+    }
+
+    public void setRobe(Robe robe) {
+        this.robe = robe;
+    }
+
+    public Robe getRobe() {
+        return robe;
     }
 
     public String getSire() {

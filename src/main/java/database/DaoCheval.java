@@ -2,6 +2,7 @@ package database;
 
 import model.Cheval;
 import model.Race;
+import model.Robe;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,8 +26,10 @@ public class DaoCheval {
             requeteSql = cnx.prepareStatement(
                 "SELECT c.id as c_id, c.nom as c_nom, c.sexe as c_sexe, c.sire as c_sire, c.date_naissance as c_dateNaissance, " +
                 "r.id as r_id, r.nom as r_nom " +
+                        "ro.id as ro_id, ro.nom as ro_nom, ro.description as r_description " +
                 "FROM cheval c " +
-                "INNER JOIN race r ON c.race_id = r.id"
+                "INNER JOIN race r ON c.race_id = r.id " +
+                        "INNER JOIN robe ro ON c.robe_id = ro.id"
             );
             resultatRequete = requeteSql.executeQuery();
             while (resultatRequete.next()) {
@@ -40,6 +43,10 @@ public class DaoCheval {
                 r.setId(resultatRequete.getInt("r_id"));
                 r.setNom(resultatRequete.getString("r_nom"));
                 c.setRace(r);
+                Robe ro = new Robe();
+                ro.setId(resultatRequete.getInt("ro_id"));
+                ro.setNom(resultatRequete.getString("ro_nom"));
+                ro.setDescription(resultatRequete.getString("ro_description"));
                 lesChevaux.add(c);
             }
         } catch (SQLException e) {
@@ -59,10 +66,12 @@ public class DaoCheval {
         Cheval cheval = null;
         try {
             requeteSql = cnx.prepareStatement(
-                "SELECT c.id as c_id, c.nom as c_nom, " +
+                "SELECT c.id as c_id, c.nom as c_nom, c.sexe as c_sexe, c.sire as c_sire, c.date_naissance as c_dateNaissance, c.taille as c_taille, c.poids as c_poids," +
                 "r.id as r_id, r.nom as r_nom " +
+                        "ro.id as ro_id, ro.nom as ro_nom, ro.description as r_description " +
                 "FROM cheval c " +
                 "INNER JOIN race r ON c.race_id = r.id " +
+                        "INNER JOIN robe ro ON c.robe_id = ro.id " +
                 "WHERE c.id = ?"
             );
             requeteSql.setInt(1, idCheval);
@@ -71,10 +80,21 @@ public class DaoCheval {
                 cheval = new Cheval();
                 cheval.setId(resultatRequete.getInt("c_id"));
                 cheval.setNom(resultatRequete.getString("c_nom"));
+                cheval.setSexe(resultatRequete.getString("c_sexe"));
+                cheval.setSire(resultatRequete.getString("c_sire"));
+                cheval.setTaille(resultatRequete.getDouble("c_taille"));
+                cheval.setPoids(resultatRequete.getDouble("c_poids"));
+
                 Race race = new Race();
                 race.setId(resultatRequete.getInt("r_id"));
                 race.setNom(resultatRequete.getString("r_nom"));
                 cheval.setRace(race);
+
+                Robe robe = new Robe();
+                robe.setId(resultatRequete.getInt("ro_id"));
+                robe.setNom(resultatRequete.getString("ro_nom"));
+                robe.setDescription(resultatRequete.getString("ro_description"));
+                cheval.setRobe(robe);
             }
         } catch (SQLException e) {
             e.printStackTrace();
