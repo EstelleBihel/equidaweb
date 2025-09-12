@@ -23,7 +23,7 @@ public class DaoCheval {
         ArrayList<Cheval> lesChevaux = new ArrayList<Cheval>();
         try {
             requeteSql = cnx.prepareStatement(
-                "SELECT c.id as c_id, c.nom as c_nom, " +
+                "SELECT c.id as c_id, c.nom as c_nom, c.sexe as c_sexe, c.sire as c_sire, c.date_naissance as c_dateNaissance, " +
                 "r.id as r_id, r.nom as r_nom " +
                 "FROM cheval c " +
                 "INNER JOIN race r ON c.race_id = r.id"
@@ -33,6 +33,9 @@ public class DaoCheval {
                 Cheval c = new Cheval();
                 c.setId(resultatRequete.getInt("c_id"));
                 c.setNom(resultatRequete.getString("c_nom"));
+                c.setSexe(resultatRequete.getString("c_sexe"));
+                c.setSire(resultatRequete.getString("c_sire"));
+                c.setDateNaissance(resultatRequete.getDate("c_dateNaissance").toLocalDate());
                 Race r = new Race();
                 r.setId(resultatRequete.getInt("r_id"));
                 r.setNom(resultatRequete.getString("r_nom"));

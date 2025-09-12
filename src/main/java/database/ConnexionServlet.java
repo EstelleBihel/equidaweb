@@ -1,16 +1,21 @@
 package database;
 
+
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletContextEvent;
 import jakarta.servlet.ServletContextListener;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
 public class ConnexionServlet implements ServletContextListener {
 
+
     Connection cnx = null;
+
 
     public void contextInitialized(ServletContextEvent event)
     {
@@ -23,13 +28,14 @@ public class ConnexionServlet implements ServletContextListener {
             Class.forName("org.mariadb.jdbc.Driver");
             System.out.println("Pilote Mariadb JDBC chargé");
 
+
             try
             {
                 //obtention de la connexion
                 cnx = DriverManager.getConnection("jdbc:mariadb://127.0.0.1:3307/equida","root","");
                 //sauvegarder la connexion dans le context
                 servletContext.setAttribute("connection",cnx);
-                System.out.println("Connexion opérationnelle" + "jdbc:mariadb://127.0.0.1:3307/paris2024");
+                System.out.println("Connexion opérationnelle" + "jdbc:mariadb://127.0.0.1:3307//equida");
             }
             catch (SQLException e)
             {
@@ -44,7 +50,10 @@ public class ConnexionServlet implements ServletContextListener {
         }
 
 
+
+
     }
+
 
     //action qui permet de détruire le filtre
     public void contextDestroyed(ServletContextEvent event)
@@ -72,3 +81,4 @@ public class ConnexionServlet implements ServletContextListener {
         }
     }
 }
+
