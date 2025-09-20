@@ -30,4 +30,9 @@ public class Robe {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Robe{id=" + id + ", nom='" + nom + "', description='" + description + "'}";
+    }
 }
